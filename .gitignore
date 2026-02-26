@@ -8,8 +8,17 @@
 *.so
 *.dylib
 
+# File types
+*.csv
+*.json
+*.log
+
 # Test binary, built with `go test -c`
 *.test
+
+# Build folder
+build/
+examples/
 
 # Code coverage profiles and other test artifacts
 *.out
