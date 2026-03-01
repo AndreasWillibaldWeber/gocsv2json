@@ -37,3 +37,11 @@ func CreateWriter(p string) (*os.File, error) {
 	}
 	return out, nil
 }
+
+func CreateReader(p string) (*os.File, error) {
+	in, err := os.Open(p)
+	if err != nil {
+		return nil, fmt.Errorf("open file error: %w", err)
+	}
+	return in, nil
+}

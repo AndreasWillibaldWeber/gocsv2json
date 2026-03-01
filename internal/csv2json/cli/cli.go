@@ -6,8 +6,13 @@ import (
 )
 
 type flags struct {
+	noHeader bool
 	csvFile  string
 	jsonFile string
+}
+
+func (f flags) Header() bool {
+	return !f.noHeader
 }
 
 func (f flags) CSVFile() string {
@@ -19,16 +24,18 @@ func (f flags) JSONFile() string {
 }
 
 func (f flags) String() string {
-	return fmt.Sprintf("csvFile: %s, jsonFile: %s", f.csvFile, f.jsonFile)
+	return fmt.Sprintf("noHeader: %t, csvFile: %s, jsonFile: %s", f.noHeader, f.csvFile, f.jsonFile)
 }
 
 func ParseFlags() flags {
+	noHeader := flag.Bool("noheader", false, "has header row")
 	csvFile := flag.String("csvfile", "", "path to CSV file")
 	jsonFile := flag.String("jsonfile", "", "path to JSON file")
 
 	flag.Parse()
 
 	return flags{
+		noHeader: *noHeader,
 		csvFile:  *csvFile,
 		jsonFile: *jsonFile,
 	}
