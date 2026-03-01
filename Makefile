@@ -1,7 +1,7 @@
 GO ?= go
 BUILD_FOLDER = "./build"
-MAIN_FILE = "gogrades/main.go"
-OUT_FILE = "gogrades"
+MAIN_FILE = "gocsv2json/main.go"
+OUT_FILE = "gocsv2json"
 
 all: build
 
