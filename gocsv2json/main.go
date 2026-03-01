@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/andreaswillibaldweber/csv2json/internal/csv2json"
-	"github.com/andreaswillibaldweber/csv2json/internal/csv2json/cli"
+	"github.com/andreaswillibaldweber/gocsv2json/internal/csv2json"
+	"github.com/andreaswillibaldweber/gocsv2json/internal/csv2json/cli"
 )
 
 func main() {
