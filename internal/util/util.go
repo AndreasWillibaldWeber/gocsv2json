@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	m "github.com/andreaswillibaldweber/gocsv2json/internal/csv2json/models"
+	m "github.com/andreaswillibaldweber/gocsv2json/internal/models"
 )
 
 func WriteJSON(w io.Writer, j m.JSON) error {

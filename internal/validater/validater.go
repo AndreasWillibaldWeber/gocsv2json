@@ -3,8 +3,8 @@ package validater
 import (
 	"fmt"
 
-	m "github.com/andreaswillibaldweber/gocsv2json/internal/csv2json/models"
-	u "github.com/andreaswillibaldweber/gocsv2json/internal/csv2json/util"
+	m "github.com/andreaswillibaldweber/gocsv2json/internal/models"
+	u "github.com/andreaswillibaldweber/gocsv2json/internal/util"
 )
 
 func ValidateCSV(csv m.CSV) error {

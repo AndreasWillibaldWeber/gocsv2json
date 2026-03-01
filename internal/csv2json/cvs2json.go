@@ -5,9 +5,9 @@ import (
 	"io"
 	"os"
 
-	m "github.com/andreaswillibaldweber/gocsv2json/internal/csv2json/models"
-	u "github.com/andreaswillibaldweber/gocsv2json/internal/csv2json/util"
-	v "github.com/andreaswillibaldweber/gocsv2json/internal/csv2json/validater"
+	m "github.com/andreaswillibaldweber/gocsv2json/internal/models"
+	u "github.com/andreaswillibaldweber/gocsv2json/internal/util"
+	v "github.com/andreaswillibaldweber/gocsv2json/internal/validater"
 )
 
 func NewCSVFrom(r io.Reader, header bool) (*m.CSV, error) {
