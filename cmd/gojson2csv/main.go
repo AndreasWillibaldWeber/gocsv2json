@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/andreaswillibaldweber/gocsv2json/internal/cli"
-	"github.com/andreaswillibaldweber/gocsv2json/internal/csv2json"
 	"github.com/andreaswillibaldweber/gocsv2json/internal/iio"
+	"github.com/andreaswillibaldweber/gocsv2json/internal/json2csv"
 )
 
 func main() {
@@ -18,14 +18,14 @@ func main() {
 		fmt.Fprintln(os.Stderr, "stdin stat error:", err)
 		os.Exit(2)
 	}
-	if fi.Mode()&os.ModeCharDevice != 0 && flags.CSVFile() == "" {
-		fmt.Fprintln(os.Stderr, "No stdin pipe detected. Usage: cat file.csv | csv2json")
+	if fi.Mode()&os.ModeCharDevice != 0 && flags.JSONFile() == "" {
+		fmt.Fprintln(os.Stderr, "No stdin pipe detected. Usage: cat file.json | json2csv")
 		os.Exit(2)
 	}
 
 	input := os.Stdin
-	if flags.CSVFile() != "" && fi.Mode()&os.ModeCharDevice != 0 {
-		r, err := iio.CreateReader(flags.CSVFile())
+	if flags.JSONFile() != "" && fi.Mode()&os.ModeCharDevice != 0 {
+		r, err := iio.CreateReader(flags.JSONFile())
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "create reader error:", err)
 			os.Exit(1)
@@ -34,15 +34,15 @@ func main() {
 	}
 	defer input.Close()
 
-	table, err := csv2json.NewCSVFrom(input, true)
+	table, err := json2csv.NewJSONFrom(input, true)
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "csv error:", err)
+		fmt.Fprintln(os.Stderr, "json error:", err)
 		os.Exit(1)
 	}
 
 	out := os.Stdout
-	if flags.JSONFile() != "" {
-		w, err := iio.CreateWriter(flags.JSONFile())
+	if flags.CSVFile() != "" {
+		w, err := iio.CreateWriter(flags.CSVFile())
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "create writer error:", err)
 			os.Exit(1)
@@ -51,8 +51,8 @@ func main() {
 	}
 	defer out.Close()
 
-	json := csv2json.CSVtoJSON(table)
-	err = csv2json.JSONTo(out, *json)
+	csv := json2csv.JSONtoCSV(table)
+	err = json2csv.CSVTo(out, *csv)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "json error:", err)
 		os.Exit(1)

@@ -61,6 +61,13 @@ func (c CSV) String() string {
 	return fmt.Sprintf("%s", c.rows)
 }
 
+func NewEmptyCSV() *CSV {
+	return &CSV{
+		header: nil,
+		rows:   nil,
+	}
+}
+
 func NewCSV(rows Rows, header bool) *CSV {
 
 	if len(rows) == 0 {

@@ -2,6 +2,7 @@ package iio
 
 import (
 	"encoding/csv"
+	"encoding/json"
 	"fmt"
 	"io"
 	"os"
@@ -27,4 +28,16 @@ func ReadCSV(r io.Reader) (m.Rows, error) {
 		return nil, err
 	}
 	return u.GetRows(records), nil
+}
+
+func ReadJSON(r io.Reader) (m.Columns, error) {
+	var in m.JSON
+	dec := json.NewDecoder(r)
+	if err := dec.Decode(&in); err != nil {
+		return nil, err
+	}
+	if in.Columns == nil {
+		return make(m.Columns), nil
+	}
+	return in.Columns, nil
 }
