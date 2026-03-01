@@ -1,9 +1,6 @@
 package util
 
 import (
-	"encoding/csv"
-	"encoding/json"
-	"io"
 	"math"
 	"strconv"
 	"strings"
@@ -12,24 +9,7 @@ import (
 	m "github.com/andreaswillibaldweber/gocsv2json/internal/models"
 )
 
-func WriteJSON(w io.Writer, j m.JSON) error {
-	encoder := json.NewEncoder(w)
-	encoder.SetIndent("", "  ")
-	return encoder.Encode(j)
-}
-
-func ReadCSV(r io.Reader) (m.Rows, error) {
-	cr := csv.NewReader(r)
-	cr.FieldsPerRecord = -1
-	cr.TrimLeadingSpace = true
-	records, err := cr.ReadAll()
-	if err != nil {
-		return nil, err
-	}
-	return getRows(records), nil
-}
-
-func getRows(records [][]string) m.Rows {
+func GetRows(records [][]string) m.Rows {
 	maxCols := maxColumns(records)
 	rows := make(m.Rows, len(records))
 	for i := range records {
